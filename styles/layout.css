@@ -1,0 +1,31 @@
+main {
+  @apply flex flex-row items-start;
+  height: calc(100vh - 100px);
+}
+
+header,
+footer {
+  @apply flex bg-slate-400 text-white h-[70px] items-center px-5;
+}
+
+footer {
+  @apply h-[30px] justify-end;
+}
+
+aside {
+  @apply flex h-full bg-white p-5 min-w-[300px] max-w-[400px];
+}
+
+.content {
+  @apply bg-slate-200 p-5 w-full h-full;
+}
+
+.hosts-table {
+  @apply bg-white w-max p-2;
+}
+.hosts-table td, th {
+  @apply border border-slate-400 p-2;
+}
+.hosts-table th {
+    @apply font-semibold;
+  }

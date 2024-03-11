@@ -16,7 +16,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <body className={inter.className}>
+        <header>Home Network Management</header>
+        {children}
+        <footer>&copy; 2022 - {new Date().getFullYear()}</footer>
+      </body>
     </html>
   );
 }
