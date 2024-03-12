@@ -1,44 +1,63 @@
-'use client'
+"use client";
 
-import { createHost, editHost, removeHost } from "@/app/actions";
-import { HostInfo } from "@/interfaces/types";
+import {
+  removeGroup,
+  removeHost
+} from "@/app/actions";
+import { IGroup, IHostInfo } from "@/interfaces/types";
+import Link from "next/link";
+import { Fragment } from "react";
 
 type Props = {
-  hosts: HostInfo[];
+  hosts: IHostInfo[];
+  groups: IGroup[];
 };
 
-const HostsTable = ({ hosts }: Props) => {
+const HostsTable = ({ hosts, groups }: Props) => {
   return (
-    <table className="hosts-table">
-      <thead>
-        <tr>
-          <th>IP</th>
-          <th>MAC</th>
-          <th>URL</th>
-          <th>Name</th>
-          <th>Wake on LAN</th>
-          <th>
-            <button onClick={() => createHost()}>create</button>
-          </th>
-        </tr>
-      </thead>
-      <tbody>
-        {hosts?.map((h: HostInfo) => (
-          <tr key={h.macAddr}>
-            <td>{h.ipAddr}</td>
-            <td>{h.macAddr}</td>
-            <td>{h.url}</td>
-            <td className="text-center">{h.name}</td>
-            <td className="text-center">{h.mayWol ? "Wake up" : "Disabled"}</td>
-            <td>
-              <button onClick={() => removeHost(h.macAddr)}>remove</button>
-              <br/>
-              <button onClick={() => editHost(h.macAddr)}>edit</button>
-            </td>
-          </tr>
-        ))}
-      </tbody>
-    </table>
+    <div className="flex flex-col gap-4">
+      <table className="hosts-table">
+        <tbody>
+          {groups?.map((g) => {
+            const hostsByGroup = hosts.filter((h) => h.group_id == g.id);
+            return (
+              <Fragment key={g.id}>
+                <tr>
+                  <td colSpan={3}>{g.name}</td>
+                  <td className="flex flex-row gap-2">
+                    <Link href={`/edit-group/${g.id}`}>Rename group</Link>
+                    <button onClick={() => removeGroup(g.id)}>
+                      Delete group
+                    </button>
+                  </td>
+                </tr>
+                <tr>
+                  <td>Name</td>
+                  <td>URL</td>
+                  <td>Description</td>
+                  <td>
+                    <Link href={`/create-host/${g.id}`}>Add host</Link>
+                  </td>
+                </tr>
+
+                {hostsByGroup?.map((h: IHostInfo) => (
+                  <tr key={h.id}>
+                    <td className="text-center">{h.name}</td>
+                    <td>{h.url}</td>
+                    <td>{h.description}</td>
+                    <td className="flex flex-row gap-2">
+                      <button onClick={() => removeHost(h.url)}>Delete</button>
+                      <Link href={`/edit-host/${h.id}`}>Edit</Link>
+                    </td>
+                  </tr>
+                ))}
+              </Fragment>
+            );
+          })}
+        </tbody>
+      </table>
+      <Link href={`/create-group`}>Add group</Link>
+    </div>
   );
 };
 

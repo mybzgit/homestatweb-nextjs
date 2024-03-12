@@ -1,11 +1,16 @@
-export interface HostInfo {
-    ipAddr: string;
-    macAddr: string;
-    mayWol: boolean;
-    name: string;
-    url: string;
+export interface IHostInfo {
+  id: string;
+  name: string;
+  url: string;
+  description: string;
+  group_id: string;
 }
 
-export interface HostInfoList {
-    hostInfoList: HostInfo[];
+export interface IHostInfoList {
+  hostInfoList: IHostInfo[];
+}
+
+export interface IGroup {
+  id: string;
+  name: string;
 }

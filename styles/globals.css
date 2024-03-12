@@ -3,7 +3,11 @@
 @tailwind utilities;
 
 @layer base {
-  @import './../styles/layout.css';
+  @import './layout.css';
+}
+
+@layer components {
+  @import './buttons.css';
 }
 /* 
 @layer components {
