@@ -36,8 +36,8 @@ export async function createGroup(formData: FormData) {
     name: formData.get("name"),
   });
   writeFileSync(GROUPS_PATH, JSON.stringify(groups));
-  revalidatePath("/");
-  redirect("/");
+  revalidatePath("/edit");
+  redirect("/edit");
 }
 
 export async function editGroup(formData: FormData, id: string) {
@@ -46,8 +46,8 @@ export async function editGroup(formData: FormData, id: string) {
   if (edited !== null && edited !== undefined) {
     edited.name = formData.get("name");
     writeFileSync(GROUPS_PATH, JSON.stringify(groups));
-    revalidatePath("/");
-    redirect("/");
+    revalidatePath("/edit");
+    redirect("/edit");
   }
 }
 
@@ -55,7 +55,7 @@ export async function removeGroup(id: string) {
   let groups = await getGroups();
   groups = groups.filter((g) => g.id !== id);
   writeFileSync(GROUPS_PATH, JSON.stringify(groups));
-  revalidatePath("/");
+  revalidatePath("/edit");
 }
 
 export async function getHosts() {
@@ -88,8 +88,8 @@ export async function createHost(formData: FormData, groupId: string) {
     group_id: groupId,
   });
   writeFileSync(HOSTS_PATH, JSON.stringify(hosts));
-  revalidatePath("/");
-  redirect("/");
+  revalidatePath("/edit");
+  redirect("/edit");
 }
 
 export async function editHost(formData: FormData, id: string) {
@@ -100,8 +100,8 @@ export async function editHost(formData: FormData, id: string) {
     edited.url = formData.get("url");
     edited.description = formData.get("description");
     writeFileSync(HOSTS_PATH, JSON.stringify(hosts));
-    revalidatePath("/");
-    redirect("/");
+    revalidatePath("/edit");
+    redirect("/edit");
   }
 }
 
@@ -109,7 +109,7 @@ export async function removeHost(id: string) {
   let hosts = await getHosts();
   hosts = hosts.filter((h) => h.id !== id);
   writeFileSync(HOSTS_PATH, JSON.stringify(hosts));
-  revalidatePath("/");
+  revalidatePath("/edit");
 }
 
 export async function updateImage(formData: FormData) {
@@ -118,5 +118,6 @@ export async function updateImage(formData: FormData) {
   await writeFileSync(`data/test.${file.name}`, Buffer.from(data));
   unlink("data/image.png", (err) => console.log(err));
   rename(`data/test.${file.name}`, "data/image.png", (err) => console.log(err));
-  revalidatePath("/");
+  revalidatePath("/edit");
+  redirect("/")
 }

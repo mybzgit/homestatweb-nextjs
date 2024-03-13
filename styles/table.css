@@ -1,0 +1,20 @@
+.hosts-table {
+  @apply bg-white w-max p-2 shadow-md;
+}
+
+tr {
+    @apply border shadow-sm;
+}
+
+td, th {
+  @apply py-2 px-3;
+}
+
+.header-cell {
+    @apply font-medium bg-sky-700 text-white;
+}
+
+.group-row {
+    @apply font-medium bg-emerald-400;
+}
+

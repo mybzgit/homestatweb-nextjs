@@ -5,8 +5,10 @@ const CreateHost = ({ params }: { params: { groupid: string } }) => {
 
   return (
     <main>
-      <div>create host {groupid}</div>
-      <HostForm groupId={groupid} />
+      <div className="flex flex-col gap-4">
+        <div className="text-center font-semibold text-lg">Create new host</div>
+        <HostForm groupId={groupid} />
+      </div>
     </main>
   );
 };

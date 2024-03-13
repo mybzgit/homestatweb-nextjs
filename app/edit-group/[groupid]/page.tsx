@@ -8,8 +8,10 @@ const EditGroup = async ({ params }: { params: { groupid: string } }) => {
   const group = await getGroup(groupid);
   return (
     <main>
-      <div>edit group {groupid}</div>
-      <GroupForm isEdit group={group} />
+      <div className="flex flex-col gap-4">
+        <div className="text-center font-semibold text-lg">Editing group</div>
+        <GroupForm isEdit group={group} />
+      </div>
     </main>
   );
 };

@@ -4,6 +4,8 @@ import { createGroup, editGroup } from "@/app/actions";
 import { IGroup } from "@/interfaces/types";
 import Link from "next/link";
 import { useCallback } from "react";
+import Button from "./Button";
+import LinkButton from "./LinkButton";
 
 type Props = {
   isEdit?: boolean;
@@ -22,13 +24,13 @@ const GroupForm = ({ isEdit = false, group }: Props) => {
   return (
     <form action={onSubmit} className="flex flex-col gap-2">
       <label htmlFor="name">
-        <span className="mr-2 w-[100px] inline-block text-end">Name:</span>
+        <span className="label">Name:</span>
         <input type="text" id="name" name="name" defaultValue={group?.name} />
       </label>
 
       <div className="flex flex-row justify-end gap-2">
-        <button type="submit">Save</button>
-        <Link href='/'>Cancel</Link>
+        <Button type="submit">Save</Button>
+        <LinkButton className='btn-light' href='/edit'>Cancel</LinkButton>
       </div>
     </form>
   );

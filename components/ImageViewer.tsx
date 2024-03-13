@@ -3,6 +3,7 @@
 import { updateImage } from "@/app/actions";
 import schemeImg from "@/data/image.png";
 import { useState } from "react";
+import Button from "./Button";
 
 const ImageViewer = () => {
   const [showInput, setShowInput] = useState(false);
@@ -15,16 +16,16 @@ const ImageViewer = () => {
         alt="Scheme of network"
       />
       {!showInput && (
-        <button onClick={() => setShowInput(true)}>Update image</button>
+        <Button onClick={() => setShowInput(true)}>Update image</Button>
       )}
       {showInput && (
         <form action={updateImage}>
           <input name="schemeImg" type="file" accept="image/png, image/jpeg" />
           <div className="flex flex-row gap-4 items-center mt-4">
-            <button type="submit">Update</button>
-            <button type="button" onClick={() => setShowInput(false)}>
+            <Button type="submit">Update</Button>
+            <Button className="btn-light" type="button" onClick={() => setShowInput(false)}>
               Cancel
-            </button>
+            </Button>
           </div>
         </form>
       )}

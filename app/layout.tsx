@@ -1,6 +1,7 @@
+import Header from "@/components/Header";
+import "@/styles/globals.css";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
-import "@/styles/globals.css";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -17,7 +18,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <header>Home Network Management</header>
+        <Header />
         {children}
         <footer>&copy; 2022 - {new Date().getFullYear()}</footer>
       </body>

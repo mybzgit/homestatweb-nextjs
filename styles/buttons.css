@@ -1,17 +1,22 @@
-button {
-    font-size: 1em;
-    font-weight: 500;
-    background-color: #1a1a1a;
-    cursor: pointer;
-    transition: border-color 0.25s;
-    background-color: slategrey !important;
-    color: white !important;
-    padding: 5px !important;
-  }
-  button:hover {
-    border-color: #646cff;
-  }
-  button:focus,
-  button:focus-visible {
-    outline: 4px auto -webkit-focus-ring-color;
-  }
+button.btn,
+a.btn {
+  @apply bg-emerald-700 text-base cursor-pointer text-white py-1 px-2.5 shadow-md;
+}
+button.btn:hover,
+a.btn:hover {
+  @apply bg-neutral-500;
+}
+
+button.btn-light,
+a.btn-light {
+  @apply bg-white text-base cursor-pointer py-1 px-2.5 shadow-md;
+}
+
+button.btn-light:hover,
+a.btn-light:hover {
+  @apply bg-neutral-300;
+}
+
+a.link {
+  @apply text-lg;
+}

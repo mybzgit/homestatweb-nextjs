@@ -1,15 +1,15 @@
 main {
-  @apply flex flex-row items-start h-auto overflow-auto  bg-slate-200;
+  @apply flex flex-col items-start h-auto p-5 overflow-auto bg-orange-50;
   min-height: calc(100vh - 100px);
 }
 
 header,
 footer {
-  @apply flex bg-slate-400 text-white h-[70px] items-center px-5;
+  @apply flex bg-sky-800 text-white h-[70px] items-center px-5;
 }
 
 header {
-  @apply text-xl;
+  @apply text-xl font-semibold flex flex-row justify-between items-center;
 }
 
 footer {
@@ -17,16 +17,10 @@ footer {
 }
 
 .content {
-  @apply p-5 w-full h-full flex flex-row justify-evenly items-start;
+  @apply w-full h-full flex flex-col md:flex-row gap-4 justify-stretch items-start mx-auto;
 }
 
-.hosts-table {
-  @apply bg-white w-max p-2;
-}
-.hosts-table td,
-th {
-  @apply border border-slate-400 p-2;
-}
-.hosts-table th {
-  @apply font-semibold;
-}
+
+
+
+

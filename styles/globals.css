@@ -8,6 +8,8 @@
 
 @layer components {
   @import './buttons.css';
+  @import './inputs.css';
+  @import './table.css';
 }
 /* 
 @layer components {

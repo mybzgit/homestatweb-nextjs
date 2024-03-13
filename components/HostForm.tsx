@@ -2,8 +2,9 @@
 
 import { createHost, editHost } from "@/app/actions";
 import { IHostInfo } from "@/interfaces/types";
-import Link from "next/link";
 import { useCallback } from "react";
+import Button from "./Button";
+import LinkButton from "./LinkButton";
 
 type Props = {
   isEdit?: boolean;
@@ -12,7 +13,6 @@ type Props = {
 };
 
 const HostForm = ({ isEdit = false, host, groupId }: Props) => {
-  
   const onSubmit = useCallback(
     (formData: FormData) => {
       if (isEdit) editHost(formData, host!.id);
@@ -24,21 +24,19 @@ const HostForm = ({ isEdit = false, host, groupId }: Props) => {
   return (
     <form action={onSubmit} className="flex flex-col gap-2">
       <label htmlFor="name">
-        <span className="mr-2 w-[100px] inline-block text-end">Name:</span>
+        <span className="label">Name:</span>
         <input type="text" id="name" name="name" defaultValue={host?.name} />
       </label>
 
       <label htmlFor="url">
-        <span className="mr-2 w-[100px] inline-block text-end">URL:</span>
+        <span className="label">URL:</span>
         <input type="text" id="url" name="url" defaultValue={host?.url} />
       </label>
 
       <label htmlFor="description">
-        <span className="mr-2 w-[100px] inline-block text-end">
-          Description:
-        </span>
-        <input
-          type="text"
+        <span className="label">Description:</span>
+        <textarea
+          rows={3}
           id="description"
           name="description"
           defaultValue={host?.description}
@@ -46,8 +44,10 @@ const HostForm = ({ isEdit = false, host, groupId }: Props) => {
       </label>
 
       <div className="flex flex-row justify-end gap-2">
-        <button type="submit">Save</button>
-        <Link href='/'>Cancel</Link>
+        <Button type="submit">Save</Button>
+        <LinkButton className="btn-light" href="/edit">
+          Cancel
+        </LinkButton>
       </div>
     </form>
   );

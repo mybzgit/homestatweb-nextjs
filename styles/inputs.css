@@ -1,0 +1,7 @@
+span.label {
+    @apply mr-2 w-[100px] inline-block text-end text-lg font-medium;
+}
+
+input[type="text"], textarea[rows="3"] {
+    @apply py-1 px-2 shadow-md text-lg;
+}
