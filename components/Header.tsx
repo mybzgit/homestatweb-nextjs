@@ -1,7 +1,7 @@
 "use client";
 
 import { usePathname } from "next/navigation";
-import LinkButton from "./LinkButton";
+import LinkButton from "./form/LinkButton";
 
 const Header = () => {
   const pathname = usePathname();

@@ -33,7 +33,7 @@ export async function createGroup(formData: FormData) {
   const groups = await getGroups();
   groups.push({
     id: randomUUID(),
-    name: formData.get("name"),
+    name: formData.get("name") as string,
   });
   writeFileSync(GROUPS_PATH, JSON.stringify(groups));
   revalidatePath("/edit");
@@ -44,7 +44,7 @@ export async function editGroup(formData: FormData, id: string) {
   const groups = await getGroups();
   const edited = groups.find((g) => g.id == id);
   if (edited !== null && edited !== undefined) {
-    edited.name = formData.get("name");
+    edited.name = formData.get("name") as string;
     writeFileSync(GROUPS_PATH, JSON.stringify(groups));
     revalidatePath("/edit");
     redirect("/edit");
@@ -82,9 +82,9 @@ export async function createHost(formData: FormData, groupId: string) {
   const hosts = await getHosts();
   hosts.push({
     id: randomUUID(),
-    name: formData.get("name"),
-    url: formData.get("url"),
-    description: formData.get("description"),
+    name: formData.get("name") as string,
+    url: formData.get("url") as string,
+    description: formData.get("description") as string,
     group_id: groupId,
   });
   writeFileSync(HOSTS_PATH, JSON.stringify(hosts));
@@ -96,9 +96,9 @@ export async function editHost(formData: FormData, id: string) {
   const hosts = await getHosts();
   const edited = hosts.find((h) => h.id == id);
   if (edited !== null && edited !== undefined) {
-    edited.name = formData.get("name");
-    edited.url = formData.get("url");
-    edited.description = formData.get("description");
+    edited.name = formData.get("name") as string;
+    edited.url = formData.get("url") as string;
+    edited.description = formData.get("description") as string;
     writeFileSync(HOSTS_PATH, JSON.stringify(hosts));
     revalidatePath("/edit");
     redirect("/edit");
@@ -119,5 +119,5 @@ export async function updateImage(formData: FormData) {
   unlink("data/image.png", (err) => console.log(err));
   rename(`data/test.${file.name}`, "data/image.png", (err) => console.log(err));
   revalidatePath("/edit");
-  redirect("/")
+  redirect("/");
 }

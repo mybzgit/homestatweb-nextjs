@@ -4,8 +4,8 @@ import { removeGroup, removeHost } from "@/app/actions";
 import { IGroup, IHostInfo } from "@/interfaces/types";
 import Link from "next/link";
 import { Fragment } from "react";
-import Button from "./Button";
-import LinkButton from "./LinkButton";
+import Button from "./form/Button";
+import LinkButton from "./form/LinkButton";
 
 type Props = {
   hosts: IHostInfo[];

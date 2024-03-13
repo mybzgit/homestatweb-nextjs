@@ -3,7 +3,7 @@
 import { updateImage } from "@/app/actions";
 import schemeImg from "@/data/image.png";
 import { useState } from "react";
-import Button from "./Button";
+import Button from "./form/Button";
 
 const ImageViewer = () => {
   const [showInput, setShowInput] = useState(false);

@@ -3,8 +3,8 @@
 import { createHost, editHost } from "@/app/actions";
 import { IHostInfo } from "@/interfaces/types";
 import { useCallback } from "react";
-import Button from "./Button";
-import LinkButton from "./LinkButton";
+import Button from "./form/Button";
+import LinkButton from "./form/LinkButton";
 
 type Props = {
   isEdit?: boolean;

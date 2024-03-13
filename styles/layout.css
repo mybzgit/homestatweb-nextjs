@@ -17,7 +17,7 @@ footer {
 }
 
 .content {
-  @apply w-full h-full flex flex-col md:flex-row gap-4 justify-stretch items-start mx-auto;
+  @apply w-full h-full flex flex-col md:flex-row gap-4 m-2 justify-stretch items-start mx-auto;
 }
 
 

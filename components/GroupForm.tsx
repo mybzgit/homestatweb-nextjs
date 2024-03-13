@@ -4,8 +4,8 @@ import { createGroup, editGroup } from "@/app/actions";
 import { IGroup } from "@/interfaces/types";
 import Link from "next/link";
 import { useCallback } from "react";
-import Button from "./Button";
-import LinkButton from "./LinkButton";
+import Button from "./form/Button";
+import LinkButton from "./form/LinkButton";
 
 type Props = {
   isEdit?: boolean;
