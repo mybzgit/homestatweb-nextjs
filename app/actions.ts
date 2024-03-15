@@ -37,6 +37,7 @@ export async function createGroup(formData: FormData) {
   });
   writeFileSync(GROUPS_PATH, JSON.stringify(groups));
   revalidatePath("/edit");
+  revalidatePath("/");
   redirect("/edit");
 }
 
@@ -47,6 +48,7 @@ export async function editGroup(formData: FormData, id: string) {
     edited.name = formData.get("name") as string;
     writeFileSync(GROUPS_PATH, JSON.stringify(groups));
     revalidatePath("/edit");
+    revalidatePath("/");
     redirect("/edit");
   }
 }
@@ -56,6 +58,7 @@ export async function removeGroup(id: string) {
   groups = groups.filter((g) => g.id !== id);
   writeFileSync(GROUPS_PATH, JSON.stringify(groups));
   revalidatePath("/edit");
+  revalidatePath("/");
 }
 
 export async function getHosts() {
@@ -89,6 +92,7 @@ export async function createHost(formData: FormData, groupId: string) {
   });
   writeFileSync(HOSTS_PATH, JSON.stringify(hosts));
   revalidatePath("/edit");
+  revalidatePath("/");
   redirect("/edit");
 }
 
@@ -101,6 +105,7 @@ export async function editHost(formData: FormData, id: string) {
     edited.description = formData.get("description") as string;
     writeFileSync(HOSTS_PATH, JSON.stringify(hosts));
     revalidatePath("/edit");
+    revalidatePath("/");
     redirect("/edit");
   }
 }
@@ -110,6 +115,7 @@ export async function removeHost(id: string) {
   hosts = hosts.filter((h) => h.id !== id);
   writeFileSync(HOSTS_PATH, JSON.stringify(hosts));
   revalidatePath("/edit");
+  revalidatePath("/");
 }
 
 export async function updateImage(formData: FormData) {
@@ -119,5 +125,6 @@ export async function updateImage(formData: FormData) {
   unlink("data/image.png", (err) => console.log(err));
   rename(`data/test.${file.name}`, "data/image.png", (err) => console.log(err));
   revalidatePath("/edit");
+  revalidatePath("/");
   redirect("/");
 }
