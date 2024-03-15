@@ -1,6 +1,6 @@
 button.btn,
 a.btn {
-  @apply bg-emerald-700 text-base cursor-pointer text-white py-1 px-2.5 shadow-md;
+  @apply bg-sky-600 text-base cursor-pointer text-white py-1 px-2.5 shadow-md;
 }
 button.btn:hover,
 a.btn:hover {
