@@ -1,8 +1,6 @@
 "use server";
 
 import HostsTable from "@/components/HostsTable";
-import schemeImg from "@/data/image.png";
-import Image from "next/image";
 import { getGroups, getHosts } from "./actions";
 
 export default async function Home() {
@@ -13,9 +11,12 @@ export default async function Home() {
     <main>
       <div className="content">
         <HostsTable hosts={dataHosts} groups={dataGroups} />
-        <Image
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
           className="max-w-1/2 w-full md:w-1/2"
-          src={schemeImg}
+          src="/data/image.png"
+          width={300}
+          height={300}
           alt="Scheme of network"
         />
       </div>

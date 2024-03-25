@@ -1,7 +1,6 @@
 "use client";
 
 import { updateImage } from "@/app/actions";
-import schemeImg from "@/data/image.png";
 import { useState } from "react";
 import Button from "./form/Button";
 
@@ -11,7 +10,7 @@ const ImageViewer = () => {
     <div className="flex flex-col items-center gap-4">
       {/* eslint-disable-next-line @next/next/no-img-element */}
       <img
-        src={schemeImg.src}
+        src="/data/image.png"
         width={300}
         height={300}
         alt="Scheme of network"
@@ -24,7 +23,11 @@ const ImageViewer = () => {
           <input name="schemeImg" type="file" accept="image/png, image/jpeg" />
           <div className="flex flex-row gap-4 items-center mt-4">
             <Button type="submit">Update</Button>
-            <Button className="btn-light" type="button" onClick={() => setShowInput(false)}>
+            <Button
+              className="btn-light"
+              type="button"
+              onClick={() => setShowInput(false)}
+            >
               Cancel
             </Button>
           </div>

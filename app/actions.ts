@@ -6,8 +6,8 @@ import { revalidatePath } from "next/cache";
 import { randomUUID } from "crypto";
 import { redirect } from "next/navigation";
 
-const HOSTS_PATH = "data/hosts.json";
-const GROUPS_PATH = "data/groups.json";
+const HOSTS_PATH = "public/data/hosts.json";
+const GROUPS_PATH = "public/data/groups.json";
 
 export async function getGroups() {
   const groupsBuffer = readFileSync(GROUPS_PATH);
@@ -121,9 +121,9 @@ export async function removeHost(id: string) {
 export async function updateImage(formData: FormData) {
   const file = formData.get("schemeImg") as File;
   const data = await file.arrayBuffer();
-  await writeFileSync(`data/test.${file.name}`, Buffer.from(data));
-  unlink("data/image.png", (err) => console.log(err));
-  rename(`data/test.${file.name}`, "data/image.png", (err) => console.log(err));
+  await writeFileSync(`public/data/test.${file.name}`, Buffer.from(data));
+  unlink("public/data/image.png", (err) => console.log(err));
+  rename(`public/data/test.${file.name}`, "public/data/image.png", (err) => console.log(err));
   revalidatePath("/edit");
   revalidatePath("/");
   redirect("/");
