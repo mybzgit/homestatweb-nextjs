@@ -1,38 +1,23 @@
-"use client";
+"use server";
 
-import { updateImage } from "@/app/actions";
-import { useState } from "react";
-import Button from "./form/Button";
+import { getImageVersion } from "@/app/actions";
+import ImageUpdater from "./ImageUpdater";
 
-const ImageViewer = () => {
-  const [showInput, setShowInput] = useState(false);
+const ImageViewer = async () => {
+  const imageVersion = await getImageVersion();
+  const imageSrc = `/api/get-image?url=image-${imageVersion}.png`;
+
   return (
     <div className="flex flex-col items-center gap-4">
       {/* eslint-disable-next-line @next/next/no-img-element */}
       <img
-        src="/data/image.png"
+        src={imageSrc}
         width={300}
         height={300}
         alt="Scheme of network"
       />
-      {!showInput && (
-        <Button onClick={() => setShowInput(true)}>Update image</Button>
-      )}
-      {showInput && (
-        <form action={updateImage}>
-          <input name="schemeImg" type="file" accept="image/png, image/jpeg" />
-          <div className="flex flex-row gap-4 items-center mt-4">
-            <Button type="submit">Update</Button>
-            <Button
-              className="btn-light"
-              type="button"
-              onClick={() => setShowInput(false)}
-            >
-              Cancel
-            </Button>
-          </div>
-        </form>
-      )}
+
+      <ImageUpdater />
     </div>
   );
 };

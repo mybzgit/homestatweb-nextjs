@@ -8,6 +8,7 @@ import { redirect } from "next/navigation";
 
 const HOSTS_PATH = "public/data/hosts.json";
 const GROUPS_PATH = "public/data/groups.json";
+const IMAGE_VERSION_PATH = "public/data/image-version.json";
 
 export async function getGroups() {
   const groupsBuffer = readFileSync(GROUPS_PATH);
@@ -118,12 +119,34 @@ export async function removeHost(id: string) {
   revalidatePath("/");
 }
 
+export async function getImageVersion() {
+  const buffer = readFileSync(IMAGE_VERSION_PATH);
+  const bufferString = buffer.toString();
+  let version: string;
+  if (!bufferString) {
+    version = "0";
+  }
+  version = JSON.parse(bufferString).version;
+  return version;
+}
+
 export async function updateImage(formData: FormData) {
   const file = formData.get("schemeImg") as File;
   const data = await file.arrayBuffer();
   await writeFileSync(`public/data/test.${file.name}`, Buffer.from(data));
-  unlink("public/data/image.png", (err) => console.log(err));
-  rename(`public/data/test.${file.name}`, "public/data/image.png", (err) => console.log(err));
+
+  let version = await getImageVersion()
+
+  unlink(`public/data/image-${version}.png`, (err) => console.log(err));
+
+  version = randomUUID();
+  writeFileSync(IMAGE_VERSION_PATH, JSON.stringify({ version }));
+
+  rename(
+    `public/data/test.${file.name}`,
+    `public/data/image-${version}.png`,
+    (err) => console.log(err)
+  );
   revalidatePath("/edit");
   revalidatePath("/");
   redirect("/");
