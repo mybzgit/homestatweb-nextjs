@@ -9,6 +9,7 @@ const ImageViewer = () => {
   const [showInput, setShowInput] = useState(false);
   return (
     <div className="flex flex-col items-center gap-4">
+      {/* eslint-disable-next-line @next/next/no-img-element */}
       <img
         src={schemeImg.src}
         width={300}
