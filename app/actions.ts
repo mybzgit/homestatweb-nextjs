@@ -5,6 +5,7 @@ import { readFileSync, rename, unlink, writeFileSync } from "fs";
 import { revalidatePath } from "next/cache";
 import { randomUUID } from "crypto";
 import { redirect } from "next/navigation";
+import { DropResult } from "react-beautiful-dnd";
 
 const HOSTS_PATH = "public/data/hosts.json";
 const GROUPS_PATH = "public/data/groups.json";
@@ -83,14 +84,17 @@ export async function getHost(id: string) {
 }
 
 export async function createHost(formData: FormData, groupId: string) {
-  const hosts = await getHosts();
+  let hosts = await getHosts();
+  hosts.filter((h) => h.group_id == groupId).forEach((i) => i.index++);
   hosts.push({
     id: randomUUID(),
     name: formData.get("name") as string,
     url: formData.get("url") as string,
     description: formData.get("description") as string,
     group_id: groupId,
+    index: 0,
   });
+
   writeFileSync(HOSTS_PATH, JSON.stringify(hosts));
   revalidatePath("/edit");
   revalidatePath("/");
@@ -108,6 +112,53 @@ export async function editHost(formData: FormData, id: string) {
     revalidatePath("/edit");
     revalidatePath("/");
     redirect("/edit");
+  }
+}
+
+export async function changeIndex(result: DropResult) {
+  const hosts = await getHosts();
+  const dragged = hosts.find((h) => h.id == result.draggableId);
+  const droppedIndex = result.destination?.index;
+
+  let updated = []
+
+  if (dragged !== undefined && droppedIndex !== undefined) {
+    const draggedIndex = result.source.index;
+    const groupId = dragged.group_id;
+    dragged.index = droppedIndex;
+
+    if (draggedIndex < droppedIndex) {
+      updated = hosts.map((i) => {
+        if (
+          i.group_id == groupId &&
+          i.index > draggedIndex &&
+          i.index <= droppedIndex &&
+          i.id != dragged.id
+        )
+          return {
+            ...i,
+            index: i.index - 1,
+          };
+        else return i;
+      });
+    } else {
+      updated = hosts.map((i) => {
+        if (
+          i.group_id == groupId &&
+          i.index < draggedIndex &&
+          i.index >= droppedIndex &&
+          i.id != dragged.id
+        )
+          return {
+            ...i,
+            index: i.index + 1,
+          };
+        else return i;
+      });
+    }
+
+    writeFileSync(HOSTS_PATH, JSON.stringify(updated));
+    revalidatePath("/");
   }
 }
 
@@ -135,7 +186,7 @@ export async function updateImage(formData: FormData) {
   const data = await file.arrayBuffer();
   await writeFileSync(`public/data/test.${file.name}`, Buffer.from(data));
 
-  let version = await getImageVersion()
+  let version = await getImageVersion();
 
   unlink(`public/data/image-${version}.png`, (err) => console.log(err));
 

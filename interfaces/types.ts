@@ -4,6 +4,7 @@ export interface IHostInfo {
   url: string;
   description: string;
   group_id: string;
+  index: number
 }
 
 export interface IHostInfoList {

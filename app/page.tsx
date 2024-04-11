@@ -1,6 +1,6 @@
 "use server";
 
-import HostsTable from "@/components/HostsTable";
+import HostsDraggableTable from "@/components/HostsDraggableTable";
 import { getGroups, getHosts, getImageVersion } from "./actions";
 
 export default async function Home() {
@@ -12,7 +12,7 @@ export default async function Home() {
   return (
     <main>
       <div className="content">
-        <HostsTable hosts={dataHosts} groups={dataGroups} />
+        <HostsDraggableTable hosts={dataHosts} groups={dataGroups} />
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           className="max-w-1/2 w-full md:w-1/2"
