@@ -39,7 +39,6 @@ const HostsDraggableTable = ({ hosts, groups }: Props) => {
                         ? "lightblue"
                         : "white",
                     }}
-                    className="table w-full"
                   >
                     {hostsByGroup?.map((h: IHostInfo, index) => (
                       <Draggable key={h.id} draggableId={h.id} index={index}>
@@ -55,15 +54,12 @@ const HostsDraggableTable = ({ hosts, groups }: Props) => {
                                 : "white",
                               ...provided.draggableProps.style,
                             }}
-                            className="table-row"
+                            className="flex flex-row items-center border-b p-2 gap-4"
                           >
-                            <div className="table-cell text-center border-b font-medium p-2">
+                            <div className="font-medium w-[150px]">
                               {h.name}
                             </div>
-                            <div className="table-cell text-center border-b font-medium p-2">
-                              {h.index}
-                            </div>
-                            <div className="table-cell border-b">
+                            <div className="w-[250px]">
                               <Link
                                 className="underline"
                                 href={h.url}
@@ -72,7 +68,7 @@ const HostsDraggableTable = ({ hosts, groups }: Props) => {
                                 {h.url}
                               </Link>
                             </div>
-                            <div className="table-cell border-b">
+                            <div className="max-w-[200px]">
                               {h.description}
                             </div>
                           </div>
