@@ -21,12 +21,11 @@ const HostsTable = ({ hosts, groups, editable = false }: Props) => {
       {editable && (
         <thead>
           <tr>
-            <th className="header-cell" colSpan={3}>
-              Group Name
-            </th>
-
             <th className="header-cell">
               <LinkButton href={`/create-group`}>Add group</LinkButton>
+            </th>
+            <th className="header-cell" colSpan={3}>
+              Group Name
             </th>
           </tr>
         </thead>
@@ -39,7 +38,6 @@ const HostsTable = ({ hosts, groups, editable = false }: Props) => {
           return (
             <Fragment key={g.id}>
               <tr className="group-row">
-                <td colSpan={3}>{g.name}</td>
                 {editable && (
                   <td className="flex flex-row gap-2">
                     <LinkButton href={`/edit-group/${g.id}`}>Rename</LinkButton>
@@ -48,13 +46,11 @@ const HostsTable = ({ hosts, groups, editable = false }: Props) => {
                     </Button>
                   </td>
                 )}
+                <td colSpan={3}>{g.name}</td>
               </tr>
 
               {editable && (
                 <tr>
-                  <td className="header-cell">Name</td>
-                  <td className="header-cell">URL</td>
-                  <td className="header-cell">Description</td>
                   {editable && (
                     <td className="header-cell text-center">
                       <LinkButton href={`/create-host/${g.id}`}>
@@ -62,18 +58,14 @@ const HostsTable = ({ hosts, groups, editable = false }: Props) => {
                       </LinkButton>
                     </td>
                   )}
+                  <td className="header-cell">Name</td>
+                  <td className="header-cell">URL</td>
+                  <td className="header-cell">Description</td>
                 </tr>
               )}
 
               {hostsByGroup?.map((h: IHostInfo, index) => (
                 <tr key={h.id}>
-                  <td className="text-center font-medium">{h.name}</td>
-                  <td>
-                    <Link className="underline" href={h.url} target="_blank">
-                      {h.url}
-                    </Link>
-                  </td>
-                  <td>{h.description}</td>
                   {editable && (
                     <td className="flex flex-row gap-2 justify-center">
                       <Button onClick={() => removeHost(h.url)}>
@@ -84,6 +76,13 @@ const HostsTable = ({ hosts, groups, editable = false }: Props) => {
                       </LinkButton>
                     </td>
                   )}
+                  <td className="text-center font-medium">{h.name}</td>
+                  <td>
+                    <Link className="underline" href={h.url} target="_blank">
+                      {h.url}
+                    </Link>
+                  </td>
+                  <td>{h.description}</td>
                 </tr>
               ))}
 
